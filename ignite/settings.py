@@ -222,4 +222,4 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:8000",  # for local dev
 ]
 
-SWAGGER_URL = 'https://ignite-production-d92d.up.railway.app' if DEBUG else 'http://localhost:8000'
+SWAGGER_URL = 'http://localhost:8000' if DEBUG else 'https://ignite-production-d92d.up.railway.app'
