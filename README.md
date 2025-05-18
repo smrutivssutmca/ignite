@@ -119,12 +119,12 @@ Options:
 
 ## Example Queries
 
-- Get all books: `/api/v1/books/`
-- Get a specific book by ID: `/api/v1/books/1/`
-- Filter books by language: `/api/v1/books/?language=en`
-- Find children's books: `/api/v1/books/?topic=children`
-- Filter by multiple authors: `/api/v1/books/?author=twain,dickens`
-- Combine filters: `/api/v1/books/?language=en&topic=adventure&author=stevenson`
+- Get all books: `/api/books/`
+- Get a specific book by ID: `/api/books/1/`
+- Filter books by language: `/api/books/?language=en`
+- Find children's books: `/api/books/?topic=children`
+- Filter by multiple authors: `/api/books/?author=twain,dickens`
+- Combine filters: `/api/books/?language=en&topic=adventure&author=stevenson`
 
 ## Response Format
 
@@ -132,7 +132,7 @@ Options:
 {
   "count": 25,
   "count_total": 547,
-  "next": "http://example.com/api/v1/books/?page=2",
+  "next": "http://example.com/api/books/?page=2",
   "previous": null,
   "results": [
     {
