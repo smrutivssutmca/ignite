@@ -33,7 +33,7 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
 # CSRF Trusted Origins
-CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://ignite-production-d92d.up.railway.app').split(',')
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://ignite-production-d92d.up.railway.app,http://ignite-production-d92d.up.railway.app,http://localhost:8000').split(',')
 
 
 # Application definition
