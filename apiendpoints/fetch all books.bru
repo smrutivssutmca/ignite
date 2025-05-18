@@ -5,12 +5,18 @@ meta {
 }
 
 get {
-  url: http://localhost:8000/api/books/?ordering=title&page=1
+  url: http://localhost:8000/api/books/?gutenberg_id=1%2C2&language=en%2Ccn&topic=abc%2Ccde&mime_type=application%2Fjson&author=abc&title=xyz&page=1&page_size=25
   body: none
   auth: inherit
 }
 
 params:query {
-  ordering: title
+  gutenberg_id: 1,2
+  language: en,cn
+  topic: abc,cde
+  mime_type: application/json
+  author: abc
+  title: xyz
   page: 1
+  page_size: 25
 }
