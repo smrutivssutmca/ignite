@@ -201,7 +201,3 @@ ignite/
 ├── Dockerfile               # Docker configuration
 └── swagger.yaml             # OpenAPI/Swagger specification
 ```
-
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details. 
