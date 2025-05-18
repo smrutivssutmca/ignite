@@ -221,3 +221,5 @@ CORS_ALLOWED_ORIGINS = [
     "http://ignite-production-d92d.up.railway.app",
     "http://localhost:8000",  # for local dev
 ]
+
+SWAGGER_URL = 'https://ignite-production-d92d.up.railway.app'

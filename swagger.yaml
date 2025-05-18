@@ -1,6 +1,6 @@
 openapi: 3.0.0
 info:
-  title: Gutenberg Books API
+  title: Ignite API
   description: API for the Project Gutenberg book catalog
   version: 1.0.0
   license:
@@ -8,8 +8,8 @@ info:
   contact:
     email: contact@example.com
 servers:
-  - url: /api/v1
-    description: API v1
+  - url: /api/
+    description: API for the Project Gutenberg book catalog
 paths:
   /books/:
     get:
