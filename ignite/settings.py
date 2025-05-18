@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Third party apps
     'rest_framework',
     'drf_yasg',
+    'whitenoise.runserver_nostatic',
     
     # Project apps
     'book',
@@ -53,6 +54,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -147,6 +149,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# WhiteNoise configuration
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Create staticfiles directory if it doesn't exist
+staticfiles_dir = os.path.join(BASE_DIR, 'staticfiles')
+if not os.path.exists(staticfiles_dir):
+    os.makedirs(staticfiles_dir)
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
