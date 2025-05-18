@@ -1,0 +1,229 @@
+openapi: 3.0.0
+info:
+  title: Gutenberg Books API
+  description: API for the Project Gutenberg book catalog
+  version: 1.0.0
+  license:
+    name: BSD License
+  contact:
+    email: contact@example.com
+servers:
+  - url: /api/v1
+    description: API v1
+paths:
+  /books/:
+    get:
+      operationId: listBooks
+      summary: List all books
+      description: |
+        Retrieves a list of books, with optional filtering.
+        Books are returned in decreasing order of popularity (download count).
+        Results are paginated with 25 books per page.
+      parameters:
+        - name: gutenberg_id
+          in: query
+          description: Filter by multiple Gutenberg IDs (comma-separated)
+          schema:
+            type: string
+          example: "1342,84,11"
+        - name: language
+          in: query
+          description: Filter by language code(s) (comma-separated)
+          schema:
+            type: string
+          example: "en,fr"
+        - name: topic
+          in: query
+          description: |
+            Filter by topic (subject or bookshelf) with case-insensitive partial matching (comma-separated).
+            For example, "topic=child" will match books from bookshelf "Children's literature" and subject "Child education".
+          schema:
+            type: string
+          example: "child,adventure"
+        - name: mime_type
+          in: query
+          description: Filter by MIME-type (comma-separated)
+          schema:
+            type: string
+          example: "text/html,application/epub+zip"
+        - name: author
+          in: query
+          description: |
+            Filter by author name with case-insensitive partial matching (comma-separated).
+            For example, "author=shake" will match "William Shakespeare".
+          schema:
+            type: string
+          example: "twain,dickens"
+        - name: title
+          in: query
+          description: |
+            Filter by title with case-insensitive partial matching (comma-separated).
+            For example, "title=adventure" will match "The Adventures of Tom Sawyer".
+          schema:
+            type: string
+          example: "pride,adventure"
+        - name: page
+          in: query
+          description: Page number for pagination
+          schema:
+            type: integer
+            default: 1
+          example: 2
+        - name: page_size
+          in: query
+          description: Number of results per page (max 100)
+          schema:
+            type: integer
+            default: 25
+            maximum: 100
+          example: 25
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                    description: Number of books on current page
+                    example: 25
+                  count_total:
+                    type: integer
+                    description: Total number of books matching criteria
+                    example: 547
+                  next:
+                    type: string
+                    nullable: true
+                    description: URL for next page of results
+                    example: "http://example.com/api/v1/books/?page=3"
+                  previous:
+                    type: string
+                    nullable: true
+                    description: URL for previous page of results
+                    example: "http://example.com/api/v1/books/?page=1"
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Book'
+  /books/{id}/:
+    get:
+      operationId: retrieveBook
+      summary: Get a specific book
+      description: Retrieves a specific book by ID
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: The book ID
+          schema:
+            type: integer
+          example: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Book'
+        '404':
+          description: Book not found
+components:
+  schemas:
+    Book:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+          example: 1
+        title:
+          type: string
+          nullable: true
+          example: "Pride and Prejudice"
+        gutenberg_id:
+          type: integer
+          example: 1342
+        download_count:
+          type: integer
+          nullable: true
+          example: 42389
+        authors:
+          type: array
+          items:
+            $ref: '#/components/schemas/Author'
+          example:
+            - name: "Jane Austen"
+              birth_year: 1775
+              death_year: 1817
+        languages:
+          type: array
+          items:
+            $ref: '#/components/schemas/Language'
+          example:
+            - code: "en"
+        subjects:
+          type: array
+          items:
+            $ref: '#/components/schemas/Subject'
+          example:
+            - name: "Love stories"
+            - name: "England -- Fiction"
+        bookshelves:
+          type: array
+          items:
+            $ref: '#/components/schemas/Bookshelf'
+          example:
+            - name: "Best Books Ever Listing"
+            - name: "Harvard Classics"
+        formats:
+          type: array
+          items:
+            $ref: '#/components/schemas/Format'
+          example:
+            - mime_type: "text/html"
+              url: "https://www.gutenberg.org/files/1342/1342-h/1342-h.htm"
+            - mime_type: "application/epub+zip"
+              url: "https://www.gutenberg.org/ebooks/1342.epub.images"
+    Author:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Jane Austen"
+        birth_year:
+          type: integer
+          nullable: true
+          example: 1775
+        death_year:
+          type: integer
+          nullable: true
+          example: 1817
+    Language:
+      type: object
+      properties:
+        code:
+          type: string
+          example: "en"
+    Subject:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Love stories"
+    Bookshelf:
+      type: object
+      properties:
+        name:
+          type: string
+          example: "Best Books Ever Listing"
+    Format:
+      type: object
+      properties:
+        mime_type:
+          type: string
+          example: "text/html"
+        url:
+          type: string
+          example: "https://www.gutenberg.org/files/1342/1342-h/1342-h.htm" 
