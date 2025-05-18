@@ -109,12 +109,12 @@ Options:
 
 1. Build the Docker image:
    ```
-   docker build -t gutenberg-api .
+   docker build -t ignite .
    ```
 
 2. Run the Docker container:
    ```
-   docker run -p 8000:8000 --env-file .env gutenberg-api
+   docker run -p 8000:8000 --env-file .env ignite
    ```
 
 ## Example Queries
