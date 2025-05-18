@@ -58,6 +58,7 @@ Create a `.env` file in the root directory with the following variables:
 SECRET_KEY=your-secret-key
 DEBUG=True
 ALLOWED_HOSTS=localhost,127.0.0.1
+CSRF_TRUSTED_ORIGINS="localhost"
 
 # Database settings
 DBNAME=defaultdb

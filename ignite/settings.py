@@ -32,6 +32,9 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 
 ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS', '*').split(',')
 
+# CSRF Trusted Origins
+CSRF_TRUSTED_ORIGINS = os.environ.get('CSRF_TRUSTED_ORIGINS', 'https://ignite-production-d92d.up.railway.app').split(',')
+
 
 # Application definition
 
